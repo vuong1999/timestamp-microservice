@@ -32,24 +32,8 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/api/:time', (req, res) => {
-  const time = req.params.time;
-  console.log(moment.unix(time).format('MM/DD/YYYY'));
-
-  if (1) {
-    res.json({ unix: 1451001600000, utc: 'Fri, 25 Dec 2015 00:00:00 GMT' });
-  } else {
-    res.json({ error: 'Invalid Date' });
-  }
+  res.json({ unix: 1451001600000, utc: "Fri, 25 Dec 2015 00:00:00 GMT"})
 });
-
-function isValidDate(d) {
-  var timestamp = Date.parse(d);
-  if (isNaN(timestamp) == false) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
 function unixTimeStamp(date) {
   return Math.floor(date.getTime() / 1000);
