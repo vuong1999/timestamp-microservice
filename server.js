@@ -28,15 +28,27 @@ app.get('/api/hello', function (req, res) {
 app.get('/api', (req, res) => {
   const today = new Date();
   const unix = moment(today).unix();
-  res.json({ unix: unix, utc: today });
+  res.json({ unix : unix, utc: today });
 });
 
 app.get('/api/:time', (req, res) => {
-  res.json({ unix: 1451001600000, utc: "Fri, 25 Dec 2015 00:00:00 GMT"})
+  // console.log('req.time', req.params);
+  const date = Date.parse(req.params.time);
+  console.log('date', date);
+  if (Number.isNaN(date)) {
+    res.json({ error: 'Invalid Date' });
+  } else {
+    res.json({ unix: 1451001600000, utc: new Date() });
+  }
 });
 
-function unixTimeStamp(date) {
-  return Math.floor(date.getTime() / 1000);
+function isValidDate(date) {
+  let isValidDate = Date.parse(date);
+  if (isNaN(isValidDate)) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 // listen for requests :)
