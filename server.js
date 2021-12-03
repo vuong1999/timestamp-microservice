@@ -36,8 +36,8 @@ app.get('/api', (req, res) => {
 
 app.get('/api/:time', (req, res) => {
   let input = req.params.time;
-
-  if (input.includes('-')) {
+  console.log('input', input, parseInt(input));
+  if (parseInt(input) < 10000) {
     /* Date String */
     responseObject['unix'] = new Date(input).getTime();
     responseObject['utc'] = new Date(input).toUTCString();
